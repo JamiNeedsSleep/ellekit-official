@@ -27,6 +27,12 @@ jobs:
         run: |
           echo "sha_short=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
+      - name: Import GPG Keys
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
       - name: Build repo
         run: ./build.sh
 
